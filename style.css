@@ -1,0 +1,60 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    margin-left: 50px;
+}
+
+h1,
+h2,
+h3 {
+    font-weight: 300;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+    border-left: 2px solid black;
+    padding-left: 10px;
+    line-height: 10px;
+}
+
+#newNoteForm {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 500px;
+}
+
+button {
+    width: 500px;
+}
+
+#newNoteForm>* {
+    margin: 5px 0;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+#newBody,
+#newTitle {
+    padding: 5px;
+}
+
+#noteList {}
+
+.noteCard {
+    border-bottom: 1px solid black;
+    width: 500px;
+    margin: 0 auto;
+}

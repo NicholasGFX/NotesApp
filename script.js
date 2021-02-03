@@ -8,17 +8,60 @@ const notes = [{
     title: 'JavaScript',
     body: 'JavaScript defines how a web page behaves.',
 }];
-
+let noteCount = 0;
+let deletedNote
 const submit = document.getElementById('submit');
 const noteList = document.getElementById('noteList');
 
+
+function makeNoteCard(title, body) {
+    //Makes new note cards and adds them to the rendered list.
+    
+    const noteCard = document.createElement('div');
+    noteCard.className = `noteCard`;
+    noteCard.id = `${noteCount}`
+    noteList.appendChild(noteCard);
+    noteCount++;
+
+    const noteTitle = document.createElement('h3');
+    noteTitle.className = 'noteTitle';
+    noteTitle.textContent = title;
+    noteCard.appendChild(noteTitle);
+
+    const noteBody = document.createElement('p');
+    noteBody.className = 'noteBody';
+    noteBody.textContent = body
+    noteCard.appendChild(noteBody);
+
+    const deleteButton = document.createElement('button');
+    deleteButton.className = `deleteButton`;
+    deleteButton.textContent = 'Delete';
+    noteCard.appendChild(deleteButton);
+
+    deleteButton.addEventListener('click', () => {
+        //notes.pop(deleteButton.parentElement.id)
+        deletedNote = notes.splice(deleteButton.parentElement.id, 1);
+        noteCount--;
+        deleteButton.parentElement.remove();
+        console.log(notes)
+        // notes.pop(noteCount)
+
+        // document.getElementById(`${noteCount}`).remove();
+        // noteCount--;
+        //add an index to the noteCard which can be referenced to delete it from the DOM and notes array
+
+    })
+}
+
 notes.forEach(note =>
-    //Render each note on page load.
+    //Renders each note on page load.
+
     makeNoteCard(note.title, note.body)
 );
 
 submit.addEventListener('click', () => {
-    //Add new notes to the notes object
+    //Adds new notes to the notes array and html file
+
     const newTitle = document.getElementById('newTitle').value;
     const newBody = document.getElementById('newBody').value;
     if (newTitle || newBody !== '') {
@@ -32,23 +75,7 @@ submit.addEventListener('click', () => {
     }
 })
 
-function makeNoteCard(title, body) {
-    //Make new note cards and add them to the rendered list.
 
-    const noteCard = document.createElement('div');
-    noteCard.className = 'noteCard';
-    noteList.appendChild(noteCard);
-
-    const noteTitle = document.createElement('h3');
-    noteTitle.className = 'noteTitle';
-    noteTitle.textContent = title;
-    noteCard.appendChild(noteTitle);
-
-    const noteBody = document.createElement('p');
-    noteBody.className = 'noteBody';
-    noteBody.textContent = body
-    noteCard.appendChild(noteBody);
-}
 
 /*
 Basic Remove Note Logic

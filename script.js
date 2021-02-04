@@ -12,6 +12,8 @@ let noteCounter = 0;
 let deletedNote;
 const submit = document.getElementById('submit');
 const noteList = document.getElementById('noteList');
+const undo = document.getElementById('undo');
+
 
 notes.forEach(note =>
     //Renders each note on page load.
@@ -73,5 +75,18 @@ function makeNoteCard(title, body) {
         deletedNote = notes.splice(deleteButton.parentElement.id, 1);
         noteCounter--;
         deleteButton.parentElement.remove();
+
     })
 }
+
+undo.addEventListener('click', () => {
+    //Adds new notes to the notes array and html file
+    notes.push({
+        title: deletedNote[0].title,
+        body: deletedNote[0].body
+    })
+    noteCounter++;
+    deletedNote = [];
+    renderNotes();
+
+})

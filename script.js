@@ -27,7 +27,6 @@ submit.addEventListener('click', () => {
 
     const newTitle = document.getElementById('newTitle').value;
     const newBody = document.getElementById('newBody').value;
-    deletedNote = null
     if (newTitle || newBody !== '') { //if note has any content, add it to the array, render it, and clear the input fields.
         notes.push({
             title: newTitle,
@@ -89,6 +88,7 @@ function makeNoteCard(title, body) {
         noteCounter--;
         deleteButton.parentElement.parentElement.remove();
 
+        undo.className = 'button is-success';
     })
 
     editButton.addEventListener('click', () => {
@@ -102,6 +102,7 @@ function makeNoteCard(title, body) {
         if (deletedNote.body) document.getElementById('newBody').value = deletedNote.body;
         noteCounter--;
         deletedNote = null;
+        undo.className = 'button is-link is-light'
         editButton.parentElement.parentElement.remove();
 
     })
@@ -109,7 +110,7 @@ function makeNoteCard(title, body) {
 
 undo.addEventListener('click', () => {
     //Adds new notes to the notes array and html file if deleted note exists
-
+    undo.className = 'button is-link is-light';
     if (deletedNote) {
         notes.splice(deletedNoteIndex, 0, deletedNote) //Places the deleted note back at its original index within the array
         noteCounter++;

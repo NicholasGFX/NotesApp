@@ -101,6 +101,7 @@ function makeNoteCard(title, body) {
         if (deletedNote.title) document.getElementById('newTitle').value = deletedNote.title;
         if (deletedNote.body) document.getElementById('newBody').value = deletedNote.body;
         noteCounter--;
+        deletedNote = null;
         editButton.parentElement.parentElement.remove();
 
     })

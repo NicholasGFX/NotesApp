@@ -96,4 +96,4 @@ undo.addEventListener('click', () => {
     noteCounter++;
     deletedNote = [];
     renderNotes();
-})
+}) 

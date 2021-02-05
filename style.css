@@ -13,7 +13,6 @@ a {
     padding-left: 10px;
     line-height: 10px;
 }
-
 #newNoteForm {
     display: flex;
     flex-direction: column;

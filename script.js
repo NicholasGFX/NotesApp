@@ -1,9 +1,9 @@
 const notes = [{
     title: 'HTML',
-    body: 'HTML defines the structure of a web page.',
+    body: 'HTML, short for Hyper-Text Markup Language, defines the structure of a web page.',
 }, {
     title: 'CSS',
-    body: 'CSS defines how a web page looks.',
+    body: 'CSS, short for Cascading Style Sheets, defines how a web page looks. This project was built with Bulma, a CSS framework.',
 }, {
     title: 'JavaScript',
     body: 'JavaScript defines how a web page behaves.',
@@ -27,6 +27,7 @@ submit.addEventListener('click', () => {
 
     const newTitle = document.getElementById('newTitle').value;
     const newBody = document.getElementById('newBody').value;
+    deletedNote = null
     if (newTitle || newBody !== '') { //if note has any content, add it to the array, render it, and clear the input fields.
         notes.push({
             title: newTitle,
@@ -82,18 +83,36 @@ function makeNoteCard(title, body) {
 
     deleteButton.addEventListener('click', () => {
         //deletes the note, stores the previous content in the deletedNote variable for "undo" functionality.
+
         deletedNoteIndex = deleteButton.parentElement.parentElement.id
         deletedNote = notes.splice(deletedNoteIndex, 1).shift();
         noteCounter--;
         deleteButton.parentElement.parentElement.remove();
 
     })
+
+    editButton.addEventListener('click', () => {
+        //edit clicked
+        //item removed from the array.
+        //item added to the note title/note text input fields.
+
+        deletedNoteIndex = editButton.parentElement.parentElement.id
+        deletedNote = notes.splice(deletedNoteIndex, 1).shift();
+        if (deletedNote.title) document.getElementById('newTitle').value = deletedNote.title;
+        if (deletedNote.body) document.getElementById('newBody').value = deletedNote.body;
+        noteCounter--;
+        editButton.parentElement.parentElement.remove();
+
+    })
 }
 
 undo.addEventListener('click', () => {
-    //Adds new notes to the notes array and html file
-    notes.splice(deletedNoteIndex, 0, deletedNote) //Places the deleted note back at its original index within the array
-    noteCounter++;
-    deletedNote = [];
-    renderNotes();
-}) 
+    //Adds new notes to the notes array and html file if deleted note exists
+
+    if (deletedNote) {
+        notes.splice(deletedNoteIndex, 0, deletedNote) //Places the deleted note back at its original index within the array
+        noteCounter++;
+        deletedNote = null;
+        renderNotes();
+    }
+})

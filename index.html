@@ -13,10 +13,12 @@
     <div id="wrapper" class="column is-three-fifths is-centered is-vcentered">
         <h1 class="title"><a href="#">{Code}Notes</a></h1>
 
-        <h2 onclick="document.getElementById('newTitle').focus()" class="block subtitle">Add a New Note!</h2>
         <div class="columns is-multiline is-centered">
+            
 
             <div class="field column is-three-fifths">
+                <h2 onclick="document.getElementById('newTitle').focus()" class="subtitle">Add a New Note!
+                </h2>
                 <label class="label">Note Title</label>
                 <div class="control">
                     <input name="newTitle" id="newTitle" class="input" type="text"
@@ -37,7 +39,7 @@
                     <button id="submit" class="button is-link">Add Note</button>
                 </div>
                 <div class="control">
-                    <button id="undo" class="button is-link is-light">Undo</button>
+                    <button id="undo" class="button is-link is-light">Undo Delete</button>
                 </div>
             </div>
         </div>
@@ -46,4 +48,5 @@
 
 </body>
 <script src="script.js"></script>
+
 </html>

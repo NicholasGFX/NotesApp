@@ -10,6 +10,7 @@ const notes = [{
 }];
 let noteCounter = 0;
 let deletedNote;
+let deletedNoteIndex;
 const submit = document.getElementById('submit');
 const noteList = document.getElementById('noteList');
 const undo = document.getElementById('undo');
@@ -49,44 +50,50 @@ function makeNoteCard(title, body) {
     //Makes new note cards and adds them to the rendered list.
 
     const noteCard = document.createElement('div');
-    noteCard.className = `noteCard`;
+    noteCard.className = `noteCard card column is-one-quarter`;
     noteCard.id = `${noteCounter}`
     noteList.appendChild(noteCard);
     noteCounter++;
 
     const noteTitle = document.createElement('h3');
-    noteTitle.className = 'noteTitle';
+    noteTitle.className = 'noteTitle card-header-title';
     noteTitle.textContent = title;
     noteCard.appendChild(noteTitle);
 
     const noteBody = document.createElement('p');
-    noteBody.className = 'noteBody';
+    noteBody.className = 'noteBody card-content';
     noteBody.textContent = body
     noteCard.appendChild(noteBody);
 
-    const deleteButton = document.createElement('button');
-    deleteButton.className = `deleteButton`;
+    const noteFooter = document.createElement('div');
+    noteFooter.className = `noteFooter card-footer`;
+    noteCard.appendChild(noteFooter);
+
+    const deleteButton = document.createElement('a');
+    deleteButton.className = `deleteButton card-footer-item`;
     deleteButton.textContent = 'Delete';
-    noteCard.appendChild(deleteButton);
+    noteFooter.appendChild(deleteButton);
+
+    const editButton = document.createElement('a');
+    editButton.className = `editButton card-footer-item`;
+    editButton.textContent = 'Edit';
+    noteFooter.appendChild(editButton);
+
 
     deleteButton.addEventListener('click', () => {
         //deletes the note, stores the previous content in the deletedNote variable for "undo" functionality.
-
-        deletedNote = notes.splice(deleteButton.parentElement.id, 1);
+        deletedNoteIndex = deleteButton.parentElement.parentElement.id
+        deletedNote = notes.splice(deletedNoteIndex, 1).shift();
         noteCounter--;
-        deleteButton.parentElement.remove();
+        deleteButton.parentElement.parentElement.remove();
 
     })
 }
 
 undo.addEventListener('click', () => {
     //Adds new notes to the notes array and html file
-    notes.push({
-        title: deletedNote[0].title,
-        body: deletedNote[0].body
-    })
+    notes.splice(deletedNoteIndex, 0, deletedNote) //Places the deleted note back at its original index within the array
     noteCounter++;
     deletedNote = [];
     renderNotes();
-
 })

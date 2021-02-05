@@ -6,26 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes App</title>
     <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <header>
-        <h1><a href="#">{Code}Notes</a></h1>
-    </header>
-    <main id="main">
-        <h2 onclick="document.getElementById('newTitle').focus()">Add a New Note!</h2>
-        <div id="newNoteForm">
-            <input type="text" name="newTitle" id="newTitle" placeholder="Note Title">
-            <textarea name="newBody" id="newBody" cols="30" rows="10" placeholder="Note Content"></textarea>
-            <button id="submit">Add Note</button>
-            <button id="undo">Undo</button>
+<body class="columns is-vcentered is-multiline is-centered block">
+    <div id="wrapper" class="column is-three-fifths is-centered is-vcentered">
+        <h1 class="title"><a href="#">{Code}Notes</a></h1>
+
+        <h2 onclick="document.getElementById('newTitle').focus()" class="block subtitle">Add a New Note!</h2>
+        <div class="columns is-multiline is-centered">
+
+            <div class="field column is-three-fifths">
+                <label class="label">Note Title</label>
+                <div class="control">
+                    <input name="newTitle" id="newTitle" class="input" type="text"
+                        placeholder="Enter your note's title here">
+                </div>
+            </div>
+
+            <div class="field column is-three-fifths">
+                <label class="label">Note Text</label>
+                <div class="control">
+                    <textarea class="textarea" name="newBody" id="newBody"
+                        placeholder="Enter your note's content here"></textarea>
+                </div>
+            </div>
+
+            <div class="field is-grouped column is-three-fifths">
+                <div class="control">
+                    <button id="submit" class="button is-link">Add Note</button>
+                </div>
+                <div class="control">
+                    <button id="undo" class="button is-link is-light">Undo</button>
+                </div>
+            </div>
         </div>
-        <h2>Notes:</h2>
-        <div id="noteList"></div>
-        
-    </main>
-    <footer></footer>
+        <div id="noteList" class="columns is-vcentered is-multiline is-centered block"></div>
+    </div>
 
 </body>
 <script src="script.js"></script>
